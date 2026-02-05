@@ -1,0 +1,92 @@
+{
+	"name": "Guanches",
+	"version": "1.0.0",
+	"author": [
+		"Eduardo Nacimiento-García"
+	],
+	"url": "https://guanches.org",
+	"descriptionmsg": "guanches-skin-desc",
+	"namemsg": "skinname-guanches",
+	"license-name": "GPL-3.0-or-later",
+	"type": "skin",
+	"requires": {
+		"MediaWiki": ">= 1.41.0"
+	},
+	"ValidSkinNames": {
+		"guanches": {
+			"class": "SkinMustache",
+			"args": [
+				{
+					"name": "guanches",
+					"responsive": true,
+					"toc": true,
+					"messages": [
+						"sitetitle",
+						"search",
+						"otherlanguages",
+						"tagline",
+						"toolbox",
+						"navigation",
+						"guanches-skin-desc"
+					],
+					"styles": [
+						"mediawiki.ui.icon",
+						"mediawiki.ui.button",
+						"skins.guanches.styles"
+					],
+					"scripts": [
+						"skins.guanches"
+					],
+					"bodyClasses": [
+						"skin-guanches",
+						"mw-body"
+					],
+					"version": "1.0.0"
+				}
+			]
+		}
+	},
+	"MessagesDirs": {
+		"Guanches": [
+			"i18n"
+		]
+	},
+	"ResourceModules": {
+		"skins.guanches.styles": {
+			"class": "MediaWiki\\ResourceLoader\\SkinModule",
+			"features": {
+				"normalize": true,
+				"elements": true,
+				"content-tables": true,
+				"content-links": true,
+				"content-media": true,
+				"content-links-external": true,
+				"interface-message-box": true,
+				"interface-category": true,
+				"toc": true
+			},
+			"targets": [
+				"desktop",
+				"mobile"
+			],
+			"styles": [
+				"resources/guanches.css"
+			]
+		},
+		"skins.guanches": {
+			"targets": [
+				"desktop",
+				"mobile"
+			],
+			"packageFiles": [
+				"resources/guanches.js"
+			]
+		}
+	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "",
+		"remoteSkinPath": "Guanches"
+	},
+	"ResourceModuleSkinStyles": {},
+	"manifest_version": 2
+}

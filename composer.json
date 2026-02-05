@@ -1,0 +1,35 @@
+{
+	"name": "enacimie/guanches-mediawiki-theme",
+	"type": "mediawiki-skin",
+	"description": "Modern skin for La Enciclopedia Guanche",
+	"keywords": [
+		"mediawiki",
+		"skin",
+		"guanches"
+	],
+	"homepage": "https://guanches.org",
+	"license": "GPL-3.0-or-later",
+	"authors": [
+		{
+			"name": "Eduardo Nacimiento-García",
+			"email": "enacimie@ull.edu.es",
+			"role": "Developer"
+		}
+	],
+	"support": {
+		"issues": "https://github.com/enacimie/guanches-mediawiki-theme/issues",
+		"source": "https://github.com/enacimie/guanches-mediawiki-theme"
+	},
+	"require": {
+		"php": ">=7.4.0",
+		"composer/installers": ">=1.0.1"
+	},
+	"extra": {
+		"installer-name": "Guanches"
+	},
+	"autoload": {
+		"classmap": [
+			"Guanches.php"
+		]
+	}
+}

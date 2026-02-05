@@ -1,0 +1,20 @@
+{
+	"@metadata": {
+		"authors": [
+			"La Enciclopedia Guanche"
+		]
+	},
+	"skinname-guanches": "Guanches",
+	"guanches-skin-desc": "Skin moderno para La Enciclopedia Guanche, diseñado para una experiencia de lectura atractiva y contemporánea.",
+	"skiptomaincontent": "Saltar al contenido principal",
+	"navigation": "Navegación",
+	"hidenavigation": "Ocultar navegación",
+	"toc": "Tabla de contenidos",
+	"hidetoc": "Ocultar tabla de contenidos",
+	"search": "Buscar",
+	"toolbox": "Herramientas",
+	"otherlanguages": "Otros idiomas",
+	"sitetitle": "La Enciclopedia Guanche",
+	"tagline": "La enciclopedia libre de la cultura guanche",
+	"extlink": "(enlace externo)"
+}

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html class="no-js" lang="{{html-user-language}}" dir="{{html-user-direction}}">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>{{{html-title}}}</title>
+	{{{html-head}}}
+	{{{html-head-items}}}
+</head>
+<body class="skin-guanches mw-body {{html-body-classes}}">
+	<!-- Skip to main content link for accessibility -->
+	<a class="guanches-skip-link" href="#mw-content">{{msg-skiptomaincontent}}</a>
+
+	<!-- Header -->
+	<header class="guanches-header" role="banner">
+		<div class="guanches-header-container">
+			<!-- Logo and site title -->
+			<div class="guanches-logo-area">
+				<a href="{{link-mainpage}}" class="guanches-logo" title="{{msg-sitetitle}}" aria-label="{{msg-sitetitle}}">
+					{{#data-logos}}
+						{{#icon}}<img src="{{.}}" width="40" height="40" alt="{{msg-sitetitle}}" class="guanches-logo-icon">{{/icon}}
+						{{^icon}}<div class="guanches-logo-placeholder"></div>{{/icon}}
+					{{/data-logos}}
+					<span class="guanches-site-title">{{msg-sitetitle}}</span>
+					{{#msg-tagline}}<span class="guanches-tagline">{{.}}</span>{{/msg-tagline}}
+				</a>
+			</div>
+
+			<!-- Search box -->
+			<div class="guanches-search">
+				<form action="{{link-search-action}}" id="searchform" method="get" role="search">
+					<input type="search" name="search" placeholder="{{msg-search}}" aria-label="{{msg-search}}" class="guanches-search-input">
+					<button type="submit" class="guanches-search-button" title="{{msg-search}}">
+						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+							<circle cx="11" cy="11" r="8"></circle>
+							<line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+						</svg>
+					</button>
+				</form>
+			</div>
+
+			<!-- User menu and personal tools -->
+			<div class="guanches-user-tools">
+				{{#data-personal-menu}}{{>Portlet}}{{/data-personal-menu}}
+			</div>
+
+			<!-- Mobile menu toggle -->
+			<button class="guanches-menu-toggle" aria-label="{{msg-navigation}}" aria-expanded="false">
+				<span class="guanches-menu-toggle-icon"></span>
+			</button>
+		</div>
+
+		<!-- Main navigation -->
+		<nav class="guanches-main-nav" role="navigation" aria-label="{{msg-navigation}}">
+			<ul class="guanches-nav-list">
+				{{#data-portlets-sidebar.data-portlets-first}}
+					{{#html-items}}{{{.}}}{{/html-items}}
+				{{/data-portlets-sidebar.data-portlets-first}}
+			</ul>
+		</nav>
+	</header>
+
+	<!-- Main content area -->
+	<div class="guanches-container">
+		<!-- Sidebar (navigation portlets) -->
+		<aside class="guanches-sidebar" role="complementary">
+			{{#data-portlets-sidebar}}
+				{{#array-portlets-rest}}
+					<section class="guanches-portlet guanches-portlet-{{id}}" id="{{id}}">
+						<h2 class="guanches-portlet-title">{{label}}</h2>
+						<ul class="guanches-portlet-list">
+							{{#html-items}}{{{.}}}{{/html-items}}
+						</ul>
+					</section>
+				{{/array-portlets-rest}}
+			{{/data-portlets-sidebar}}
+
+			<!-- Language switcher -->
+			{{#data-portlets.data-languages}}{{>Portlet}}{{/data-portlets.data-languages}}
+		</aside>
+
+		<!-- Main content -->
+		<main class="guanches-main" id="mw-content" role="main">
+			<!-- Site notice -->
+			{{#html-site-notice}}<div class="guanches-site-notice">{{{.}}}</div>{{/html-site-notice}}
+
+			<!-- Page title and actions -->
+			<header class="guanches-page-header">
+				<h1 class="guanches-page-title">{{{html-title}}}</h1>
+				<div class="guanches-page-actions">
+					{{#data-portlets.data-actions}}{{>Portlet}}{{/data-portlets.data-actions}}
+				</div>
+			</header>
+
+			<!-- Table of contents (if present) -->
+			{{#data-toc}}{{>TableOfContents}}{{/data-toc}}
+
+			<!-- Page content -->
+			<div class="guanches-content">
+				{{{html-body-content}}}
+			</div>
+
+			<!-- After content -->
+			<div class="guanches-after-content">
+				{{{html-after-content}}}
+			</div>
+
+			<!-- Categories -->
+			{{#html-categories}}{{.}}{{/html-categories}}
+		</main>
+	</div>
+
+	<!-- Footer -->
+	<footer class="guanches-footer" role="contentinfo">
+		<div class="guanches-footer-container">
+			<!-- Footer navigation -->
+			<nav class="guanches-footer-nav">
+				<ul class="guanches-footer-list">
+					{{#data-footer-places}}{{>Portlet}}{{/data-footer-places}}
+				</ul>
+			</nav>
+
+			<!-- Copyright and info -->
+			<div class="guanches-footer-info">
+				<p class="guanches-copyright">
+					{{#data-footer-info}}{{>FooterInfo}}{{/data-footer-info}}
+				</p>
+				<p class="guanches-powered-by">
+					{{#html-powered-by}}{{.}}{{/html-powered-by}}
+				</p>
+			</div>
+		</div>
+	</footer>
+
+	<!-- Scripts -->
+	{{{html-bottom-scripts}}}
+</body>
+</html>
