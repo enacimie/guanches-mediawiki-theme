@@ -45,13 +45,13 @@
 			</div>
 
 			<!-- Mobile menu toggle -->
-			<button class="guanches-menu-toggle" aria-label="{{msg-navigation}}" aria-expanded="false">
+			<button class="guanches-menu-toggle" aria-label="{{msg-navigation}}" aria-expanded="false" aria-controls="main-nav">
 				<span class="guanches-menu-toggle-icon"></span>
 			</button>
 		</div>
 
 		<!-- Main navigation -->
-		<nav class="guanches-main-nav" role="navigation" aria-label="{{msg-navigation}}">
+		<nav id="main-nav" class="guanches-main-nav" role="navigation" aria-label="{{msg-navigation}}">
 			<ul class="guanches-nav-list">
 				{{#data-portlets-sidebar.data-portlets-first}}
 					{{#html-items}}{{{.}}}{{/html-items}}
@@ -66,8 +66,8 @@
 		<aside class="guanches-sidebar" role="complementary">
 			{{#data-portlets-sidebar}}
 				{{#array-portlets-rest}}
-					<section class="guanches-portlet guanches-portlet-{{id}}" id="{{id}}">
-						<h2 class="guanches-portlet-title">{{label}}</h2>
+					<section class="guanches-portlet guanches-portlet-{{id}}" id="{{id}}" aria-labelledby="{{id}}-title">
+						<h2 id="{{id}}-title" class="guanches-portlet-title">{{label}}</h2>
 						<ul class="guanches-portlet-list">
 							{{#html-items}}{{{.}}}{{/html-items}}
 						</ul>

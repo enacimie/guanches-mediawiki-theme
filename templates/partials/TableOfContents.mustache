@@ -1,12 +1,12 @@
 {{!
 	Table of Contents template for Guanches skin
 }}
-<div class="guanches-toc" id="toc">
+<nav class="guanches-toc" id="toc" aria-label="{{msg-toc}}">
 	<div class="guanches-toc-header">
 		<h2 class="guanches-toc-title">{{msg-toc}}</h2>
-		<button class="guanches-toc-toggle" aria-label="{{msg-hidetoc}}">{{msg-toc}}</button>
+		<button class="guanches-toc-toggle" aria-label="{{msg-hidetoc}}" aria-expanded="true" aria-controls="toc-content">{{msg-toc}}</button>
 	</div>
-	<div class="guanches-toc-content">
+	<div class="guanches-toc-content" id="toc-content">
 		{{{html-toc}}}
 	</div>
-</div>
+</nav>

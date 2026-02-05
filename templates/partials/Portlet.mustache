@@ -1,9 +1,9 @@
 {{!
 	Portlet template for Guanches skin
 }}
-<section class="guanches-portlet guanches-portlet-{{id}}" id="{{id}}">
+<section class="guanches-portlet guanches-portlet-{{id}}" id="{{id}}" {{#has-label}}aria-labelledby="{{id}}-title"{{/has-label}}>
 	{{#has-label}}
-		<h2 class="guanches-portlet-title">{{label}}</h2>
+		<h2 id="{{id}}-title" class="guanches-portlet-title">{{label}}</h2>
 	{{/has-label}}
 	<ul class="guanches-portlet-list">
 		{{{html-items}}}

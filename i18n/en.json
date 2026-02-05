@@ -16,5 +16,10 @@
 	"otherlanguages": "Other languages",
 	"sitetitle": "La Enciclopedia Guanche",
 	"tagline": "The free encyclopedia of Guanche culture",
-	"extlink": "(external link)"
+	"extlink": "(external link)",
+	"menu-opened": "Menu opened",
+	"menu-closed": "Menu closed",
+	"toc-expanded": "Table of contents expanded",
+	"toc-collapsed": "Table of contents collapsed",
+	"sr-only": "Screen reader only"
 }
