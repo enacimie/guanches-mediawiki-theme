@@ -1056,6 +1056,56 @@ html.no-js .guanches-menu-toggle {
 }
 
 /* ==========================================================================
+   Categories Styling
+   ========================================================================== */
+#catlinks {
+	margin-top: var(--spacing-xl);
+	padding: var(--spacing-md);
+	background-color: var(--color-surface);
+	border: 1px solid var(--color-border);
+	border-radius: var(--radius-md);
+	font-size: var(--font-size-sm);
+}
+
+#catlinks.catlinks-allhidden {
+	display: none;
+}
+
+#catlinks ul {
+	display: flex;
+	flex-wrap: wrap;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	gap: var(--spacing-sm);
+}
+
+#catlinks li {
+	margin: 0;
+}
+
+#catlinks a {
+	display: inline-block;
+	padding: var(--spacing-xs) var(--spacing-sm);
+	background-color: var(--color-primary-light);
+	color: var(--color-primary-dark);
+	text-decoration: none;
+	border-radius: var(--radius-sm);
+	border: 1px solid var(--color-primary);
+	transition: all var(--transition-fast);
+}
+
+#catlinks a:hover {
+	background-color: var(--color-primary);
+	color: white;
+	text-decoration: none;
+}
+
+#catlinks .catlinks-allhidden {
+	display: none;
+}
+
+/* ==========================================================================
    Accessibility Improvements
    ========================================================================== */
 /* Improve contrast for inline styled subheaders */
