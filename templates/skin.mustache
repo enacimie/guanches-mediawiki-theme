@@ -32,7 +32,11 @@
 
 			<!-- Search box -->
 			<div class="guanches-search">
-				<form action="{{link-search-action}}" id="searchform" method="get" role="search">
+				{{#data-search-box}}
+				{{{.}}}
+				{{/data-search-box}}
+				{{^data-search-box}}
+				<form action="/Especial:Buscar" id="searchform" method="get" role="search">
 					<input type="search" name="search" placeholder="{{msg-search}}" aria-label="{{msg-search}}" class="guanches-search-input">
 					<button type="submit" class="guanches-search-button" title="{{msg-search}}" aria-label="{{msg-search}}">
 						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -41,6 +45,7 @@
 						</svg>
 					</button>
 				</form>
+				{{/data-search-box}}
 			</div>
 
 			<!-- User menu and personal tools -->
@@ -70,7 +75,7 @@
 		<div class="guanches-drawer-overlay" id="drawer-overlay" aria-hidden="true"></div>
 		<aside class="guanches-drawer" id="sidebar-drawer" role="navigation" aria-label="{{msg-navigation}}" aria-hidden="true">
 			<div class="guanches-drawer-header">
-				<button class="guanches-drawer-close" aria-label="{{#msg-hidenavigation}}{{.}}{{/msg-hidenavigation}}">
+				<button class="guanches-drawer-close" aria-label="{{msg-hidenavigation}}">
 					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 						<line x1="18" y1="6" x2="6" y2="18"></line>
 						<line x1="6" y1="6" x2="18" y2="18"></line>
@@ -102,6 +107,18 @@
 
 				<!-- Language switcher -->
 				{{#data-portlets.data-languages}}{{>Portlet}}{{/data-portlets.data-languages}}
+
+				<!-- Personal tools (user menu) -->
+				{{#data-portlets.data-personal}}{{>Portlet}}{{/data-portlets.data-personal}}
+
+				<!-- Page actions (edit, history, etc.) -->
+				{{#data-portlets.data-actions}}{{>Portlet}}{{/data-portlets.data-actions}}
+
+				<!-- Variants (language variants) -->
+				{{#data-portlets.data-variants}}{{>Portlet}}{{/data-portlets.data-variants}}
+
+				<!-- Notifications -->
+				{{#data-portlets.data-notifications}}{{>Portlet}}{{/data-portlets.data-notifications}}
 			</div>
 		</aside>
 
