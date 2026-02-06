@@ -18,6 +18,7 @@
 		setupTableOfContents();
 		setupSkipLink();
 		setupPortletDropdowns();
+		filterHeaderLinks();
 		enhanceExternalLinks();
 	}
 
@@ -261,7 +262,7 @@
 	}
 
 	/**
-	 * Enhance portlets with dropdown behavior (desktop)
+	 * Enhance portlets with accessibility attributes (no dropdown behavior)
 	 */
 	function setupPortletDropdowns() {
 		var portlets = document.querySelectorAll( '.guanches-portlet' );
@@ -270,80 +271,41 @@
 			var title = portlet.querySelector( '.guanches-portlet-title' );
 			var list = portlet.querySelector( '.guanches-portlet-list' );
 
-			if ( !title || !list || list.children.length <= 5 ) {
-				return; // Skip small portlets
+			if ( !title || !list ) {
+				return;
 			}
 
-			// Only on desktop
-			if ( window.innerWidth >= 1024 ) {
-				title.setAttribute( 'role', 'button' );
-				title.setAttribute( 'tabindex', '0' );
-				title.setAttribute( 'aria-expanded', 'false' );
-				title.setAttribute( 'aria-controls', list.id || ( function () {
-					var id = 'portlet-list-' + Math.random().toString( 36 ).substr( 2, 9 );
-					list.id = id;
-					return id;
-				} )() );
-
-				// Hide list initially
-				list.style.display = 'none';
-
-				var expandList = function () {
-					list.style.display = 'block';
-					title.setAttribute( 'aria-expanded', 'true' );
-				};
-
-				var collapseList = function () {
-					list.style.display = 'none';
-					title.setAttribute( 'aria-expanded', 'false' );
-				};
-
-				var toggleList = function () {
-					var isExpanded = title.getAttribute( 'aria-expanded' ) === 'true';
-					if ( isExpanded ) {
-						collapseList();
-					} else {
-						expandList();
-					}
-				};
-
-				title.addEventListener( 'click', function ( e ) {
-					e.preventDefault();
-					toggleList();
-				} );
-
-				title.addEventListener( 'keydown', function ( e ) {
-					if ( e.key === 'Enter' || e.key === ' ' ) {
-						e.preventDefault();
-						toggleList();
-					}
-					if ( e.key === 'Escape' && title.getAttribute( 'aria-expanded' ) === 'true' ) {
-						collapseList();
-						title.focus();
-					}
-				} );
-
-				// Optional hover support (does not interfere with keyboard)
-				portlet.addEventListener( 'mouseenter', expandList );
-				portlet.addEventListener( 'mouseleave', collapseList );
-
-				// Close when clicking outside
-				document.addEventListener( 'click', function ( e ) {
-					if ( title.getAttribute( 'aria-expanded' ) === 'true' &&
-						!portlet.contains( e.target ) ) {
-						collapseList();
-					}
-				} );
-
-				// Close on escape key
-				document.addEventListener( 'keydown', function ( e ) {
-					if ( e.key === 'Escape' && title.getAttribute( 'aria-expanded' ) === 'true' ) {
-						collapseList();
-						title.focus();
-					}
-				} );
+			// Add accessibility attributes for better semantics
+			title.setAttribute( 'role', 'heading' );
+			title.setAttribute( 'aria-level', '2' );
+			
+			// Ensure list has an ID for aria-labelledby reference
+			if ( !list.id ) {
+				list.id = 'portlet-list-' + Math.random().toString( 36 ).substr( 2, 9 );
 			}
+			
+			// Link list to its title for screen readers
+			list.setAttribute( 'aria-labelledby', title.id );
 		} );
+	}
+
+	/**
+	 * Filter irrelevant links from header navigation
+	 */
+	function filterHeaderLinks() {
+		var navList = document.querySelector('.guanches-nav-list');
+		if (!navList) return;
+
+		var links = navList.querySelectorAll('a');
+		links.forEach(function(link) {
+			var href = link.getAttribute('href') || '';
+			var text = link.textContent.toLowerCase();
+
+			// Hide links that are not relevant for general public
+			if (href.includes('Special:') || href.includes('Talk:') || href.includes('User:') || href.includes('File:') || href.includes('MediaWiki:') || href.includes('Help:') || text.includes('discusión') || text.includes('special') || text.includes('user')) {
+				link.style.display = 'none';
+			}
+		});
 	}
 
 	/**
@@ -399,6 +361,7 @@
 		setupTableOfContents: setupTableOfContents,
 		setupSkipLink: setupSkipLink,
 		setupPortletDropdowns: setupPortletDropdowns,
+		filterHeaderLinks: filterHeaderLinks,
 		enhanceExternalLinks: enhanceExternalLinks
 	};
 

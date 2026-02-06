@@ -443,6 +443,37 @@ a:focus-visible,
 	flex: 0 0 var(--sidebar-width);
 }
 
+/* Desktop sidebar scrolling */
+@media (min-width: 1024px) {
+	.guanches-sidebar {
+		max-height: calc(100vh - var(--header-height) - var(--spacing-2xl));
+		overflow-y: auto;
+		position: sticky;
+		top: var(--header-height);
+		padding-right: var(--spacing-sm);
+		padding-bottom: var(--spacing-xl);
+	}
+	
+	/* Custom scrollbar for sidebar */
+	.guanches-sidebar::-webkit-scrollbar {
+		width: 6px;
+	}
+	
+	.guanches-sidebar::-webkit-scrollbar-track {
+		background: var(--color-gray-100);
+		border-radius: var(--radius-full);
+	}
+	
+	.guanches-sidebar::-webkit-scrollbar-thumb {
+		background: var(--color-gray-400);
+		border-radius: var(--radius-full);
+	}
+	
+	.guanches-sidebar::-webkit-scrollbar-thumb:hover {
+		background: var(--color-gray-500);
+	}
+}
+
 .guanches-portlet {
 	margin-bottom: var(--spacing-xl);
 }
