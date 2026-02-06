@@ -11,6 +11,21 @@
 	<script>
 		// Remove no-js class and add js class for CSS enhancements
 		document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/, 'js');
+		
+		// Fix empty form action and aria-labels if needed
+		document.addEventListener('DOMContentLoaded', function() {
+			// Fix search form action if empty
+			var searchForm = document.getElementById('searchform');
+			if (searchForm && (!searchForm.getAttribute('action') || searchForm.getAttribute('action') === '')) {
+				searchForm.setAttribute('action', '/Especial:Buscar');
+			}
+			
+			// Fix drawer close button aria-label if empty
+			var drawerClose = document.querySelector('.guanches-drawer-close');
+			if (drawerClose && (!drawerClose.getAttribute('aria-label') || drawerClose.getAttribute('aria-label') === '')) {
+				drawerClose.setAttribute('aria-label', 'Ocultar navegación');
+			}
+		});
 	</script>
 	<!-- Skip to main content link for accessibility -->
 	<a class="guanches-skip-link" href="#mw-content">{{msg-skiptomaincontent}}</a>
@@ -32,11 +47,7 @@
 
 			<!-- Search box -->
 			<div class="guanches-search">
-				{{#data-search-box}}
-				{{{.}}}
-				{{/data-search-box}}
-				{{^data-search-box}}
-				<form action="/Especial:Buscar" id="searchform" method="get" role="search">
+				<form action="{{link-search-action}}" id="searchform" method="get" role="search">
 					<input type="search" name="search" placeholder="{{msg-search}}" aria-label="{{msg-search}}" class="guanches-search-input">
 					<button type="submit" class="guanches-search-button" title="{{msg-search}}" aria-label="{{msg-search}}">
 						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -45,7 +56,6 @@
 						</svg>
 					</button>
 				</form>
-				{{/data-search-box}}
 			</div>
 
 			<!-- User menu and personal tools -->
