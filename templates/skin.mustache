@@ -8,6 +8,10 @@
 	{{{html-head-items}}}
 </head>
 <body class="skin-guanches mw-body {{html-body-classes}}">
+	<script>
+		// Remove no-js class and add js class for CSS enhancements
+		document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/, 'js');
+	</script>
 	<!-- Skip to main content link for accessibility -->
 	<a class="guanches-skip-link" href="#mw-content">{{msg-skiptomaincontent}}</a>
 
@@ -30,7 +34,7 @@
 			<div class="guanches-search">
 				<form action="{{link-search-action}}" id="searchform" method="get" role="search">
 					<input type="search" name="search" placeholder="{{msg-search}}" aria-label="{{msg-search}}" class="guanches-search-input">
-					<button type="submit" class="guanches-search-button" title="{{msg-search}}">
+					<button type="submit" class="guanches-search-button" title="{{msg-search}}" aria-label="{{msg-search}}">
 						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 							<circle cx="11" cy="11" r="8"></circle>
 							<line x1="21" y1="21" x2="16.65" y2="16.65"></line>
@@ -66,7 +70,7 @@
 		<div class="guanches-drawer-overlay" id="drawer-overlay" aria-hidden="true"></div>
 		<aside class="guanches-drawer" id="sidebar-drawer" role="navigation" aria-label="{{msg-navigation}}" aria-hidden="true">
 			<div class="guanches-drawer-header">
-				<button class="guanches-drawer-close" aria-label="{{msg-hidenavigation}}">
+				<button class="guanches-drawer-close" aria-label="{{#msg-hidenavigation}}{{.}}{{/msg-hidenavigation}}">
 					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 						<line x1="18" y1="6" x2="6" y2="18"></line>
 						<line x1="6" y1="6" x2="18" y2="18"></line>
