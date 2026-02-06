@@ -23,20 +23,23 @@
 	}
 
 	/**
-	 * Mobile menu toggle functionality
+	 * Mobile drawer (sidebar) functionality
+	 * Replaces old mobile menu with off-canvas drawer
 	 */
 	function setupMobileMenu() {
 		var menuToggle = document.querySelector( '.guanches-menu-toggle' );
-		var mainNav = document.querySelector( '.guanches-main-nav' );
+		var drawer = document.getElementById( 'sidebar-drawer' );
+		var overlay = document.getElementById( 'drawer-overlay' );
+		var closeButton = drawer ? drawer.querySelector( '.guanches-drawer-close' ) : null;
 		var body = document.body;
 
-		if ( !menuToggle || !mainNav ) {
+		if ( !menuToggle || !drawer || !overlay ) {
 			return;
 		}
 
-		// Get focusable elements inside the menu
+		// Get focusable elements inside the drawer
 		var getFocusableElements = function () {
-			return mainNav.querySelectorAll( 'a, button, input, select, textarea, [tabindex]:not([tabindex="-1"])' );
+			return drawer.querySelectorAll( 'a, button, input, select, textarea, [tabindex]:not([tabindex="-1"])' );
 		};
 
 		var firstFocusableElement, lastFocusableElement;
@@ -49,12 +52,15 @@
 			}
 		};
 
-		// Create aria-live region for announcements
-		var liveRegion = document.createElement( 'div' );
-		liveRegion.setAttribute( 'aria-live', 'polite' );
-		liveRegion.setAttribute( 'aria-atomic', 'true' );
-		liveRegion.classList.add( 'screen-reader-text' );
-		document.body.appendChild( liveRegion );
+		// Use existing live region or create one
+		var liveRegion = document.querySelector( '[aria-live="polite"]' ) || ( function () {
+			var region = document.createElement( 'div' );
+			region.setAttribute( 'aria-live', 'polite' );
+			region.setAttribute( 'aria-atomic', 'true' );
+			region.classList.add( 'screen-reader-text' );
+			document.body.appendChild( region );
+			return region;
+		} )();
 
 		var announce = function ( message ) {
 			liveRegion.textContent = '';
@@ -63,15 +69,17 @@
 			}, 100 );
 		};
 
-		var openMenu = function () {
-			mainNav.classList.add( 'active' );
+		var openDrawer = function () {
+			body.classList.add( 'guanches-drawer-open' );
 			menuToggle.setAttribute( 'aria-expanded', 'true' );
-			body.classList.add( 'guanches-menu-open' );
-			announce( mw.message( 'menu-opened' ).text() );
+			overlay.setAttribute( 'aria-hidden', 'false' );
+			drawer.setAttribute( 'aria-hidden', 'false' );
 			
+			announce( mw.message( 'menu-opened' ).text() );
+
 			// Update button label
 			menuToggle.setAttribute( 'aria-label', mw.message( 'hidenavigation' ).text() );
-			
+
 			// Update focusable elements and set focus to first element
 			updateFocusableElements();
 			if ( firstFocusableElement ) {
@@ -81,52 +89,59 @@
 			}
 		};
 
-		var closeMenu = function () {
-			mainNav.classList.remove( 'active' );
+		var closeDrawer = function () {
+			body.classList.remove( 'guanches-drawer-open' );
 			menuToggle.setAttribute( 'aria-expanded', 'false' );
-			body.classList.remove( 'guanches-menu-open' );
-			announce( mw.message( 'menu-closed' ).text() );
+			overlay.setAttribute( 'aria-hidden', 'true' );
+			drawer.setAttribute( 'aria-hidden', 'true' );
 			
+			announce( mw.message( 'menu-closed' ).text() );
+
 			// Update button label
 			menuToggle.setAttribute( 'aria-label', mw.message( 'navigation' ).text() );
-			
+
 			// Return focus to menu toggle
 			menuToggle.focus();
 		};
 
-		var toggleMenu = function () {
+		var toggleDrawer = function () {
 			var isExpanded = menuToggle.getAttribute( 'aria-expanded' ) === 'true';
 			if ( isExpanded ) {
-				closeMenu();
+				closeDrawer();
 			} else {
-				openMenu();
+				openDrawer();
 			}
 		};
 
-		// Toggle menu on button click
+		// Toggle drawer on menu button click
 		menuToggle.addEventListener( 'click', function ( e ) {
 			e.preventDefault();
-			toggleMenu();
+			toggleDrawer();
 		} );
 
-		// Close menu when clicking outside
-		document.addEventListener( 'click', function ( e ) {
-			if ( mainNav.classList.contains( 'active' ) &&
-				!mainNav.contains( e.target ) &&
-				!menuToggle.contains( e.target ) ) {
-				closeMenu();
-			}
+		// Close drawer on close button click
+		if ( closeButton ) {
+			closeButton.addEventListener( 'click', function ( e ) {
+				e.preventDefault();
+				closeDrawer();
+			} );
+		}
+
+		// Close drawer when clicking on overlay
+		overlay.addEventListener( 'click', function ( e ) {
+			e.preventDefault();
+			closeDrawer();
 		} );
 
 		// Keyboard navigation and focus trap
-		mainNav.addEventListener( 'keydown', function ( e ) {
-			if ( !mainNav.classList.contains( 'active' ) ) {
+		drawer.addEventListener( 'keydown', function ( e ) {
+			if ( !body.classList.contains( 'guanches-drawer-open' ) ) {
 				return;
 			}
 
 			if ( e.key === 'Escape' ) {
 				e.preventDefault();
-				closeMenu();
+				closeDrawer();
 				return;
 			}
 
@@ -147,14 +162,14 @@
 			}
 		} );
 
-		// Close menu on escape key from anywhere
+		// Close drawer on escape key from anywhere
 		document.addEventListener( 'keydown', function ( e ) {
-			if ( e.key === 'Escape' && mainNav.classList.contains( 'active' ) ) {
-				closeMenu();
+			if ( e.key === 'Escape' && body.classList.contains( 'guanches-drawer-open' ) ) {
+				closeDrawer();
 			}
 		} );
 
-		// Update focusable elements on menu open/close
+		// Update focusable elements on drawer open/close
 		menuToggle.addEventListener( 'click', updateFocusableElements );
 	}
 

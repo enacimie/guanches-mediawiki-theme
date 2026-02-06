@@ -438,40 +438,78 @@ a:focus-visible,
 	width: 100%;
 }
 
-/* Sidebar */
-.guanches-sidebar {
-	flex: 0 0 var(--sidebar-width);
+/* Drawer (off-canvas navigation) */
+.guanches-drawer-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.5);
+	z-index: var(--z-modal-backdrop);
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity var(--transition-base), visibility var(--transition-base);
 }
 
-/* Desktop sidebar scrolling */
-@media (min-width: 1024px) {
-	.guanches-sidebar {
-		max-height: calc(100vh - var(--header-height) - var(--spacing-2xl));
-		overflow-y: auto;
-		position: sticky;
-		top: var(--header-height);
-		padding-right: var(--spacing-sm);
-		padding-bottom: var(--spacing-xl);
-	}
-	
-	/* Custom scrollbar for sidebar */
-	.guanches-sidebar::-webkit-scrollbar {
-		width: 6px;
-	}
-	
-	.guanches-sidebar::-webkit-scrollbar-track {
-		background: var(--color-gray-100);
-		border-radius: var(--radius-full);
-	}
-	
-	.guanches-sidebar::-webkit-scrollbar-thumb {
-		background: var(--color-gray-400);
-		border-radius: var(--radius-full);
-	}
-	
-	.guanches-sidebar::-webkit-scrollbar-thumb:hover {
-		background: var(--color-gray-500);
-	}
+.guanches-drawer {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 320px;
+	height: 100vh;
+	background-color: var(--color-background);
+	box-shadow: var(--shadow-xl);
+	z-index: var(--z-modal);
+	transform: translateX(-100%);
+	transition: transform var(--transition-base);
+	display: flex;
+	flex-direction: column;
+}
+
+.guanches-drawer-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: var(--spacing-md) var(--spacing-lg);
+	border-bottom: 1px solid var(--color-border);
+	background-color: var(--color-surface);
+}
+
+.guanches-drawer-title {
+	font-size: var(--font-size-lg);
+	font-weight: 600;
+	margin: 0;
+	color: var(--color-primary);
+}
+
+.guanches-drawer-close {
+	background: none;
+	border: none;
+	padding: var(--spacing-sm);
+	cursor: pointer;
+	color: var(--color-text);
+	transition: color var(--transition-fast);
+}
+
+.guanches-drawer-close:hover {
+	color: var(--color-primary);
+}
+
+.guanches-drawer-content {
+	flex: 1;
+	overflow-y: auto;
+	padding: var(--spacing-lg);
+}
+
+/* Drawer open states */
+.guanches-drawer-open .guanches-drawer-overlay {
+	opacity: 1;
+	visibility: visible;
+}
+
+.guanches-drawer-open .guanches-drawer {
+	transform: translateX(0);
 }
 
 .guanches-portlet {
@@ -700,14 +738,8 @@ a:focus-visible,
 		gap: var(--spacing-xl);
 	}
 
-	.guanches-sidebar {
-		flex: none;
-		width: 100%;
-		order: 2;
-	}
-
 	.guanches-main {
-		order: 1;
+		width: 100%;
 	}
 
 	.guanches-nav-list {
@@ -748,14 +780,13 @@ a:focus-visible,
 
 	.guanches-menu-toggle {
 		display: block;
+		padding: var(--spacing-md);
+		min-height: 44px;
+		min-width: 44px;
 	}
 
 	.guanches-main-nav {
 		display: none;
-	}
-
-	.guanches-main-nav.active {
-		display: block;
 	}
 
 	.guanches-nav-list {
@@ -766,6 +797,12 @@ a:focus-visible,
 	.guanches-nav-list a {
 		padding: var(--spacing-md);
 		border-bottom: 1px solid var(--color-border);
+	}
+
+	.guanches-drawer-close {
+		padding: var(--spacing-md);
+		min-height: 44px;
+		min-width: 44px;
 	}
 
 	.guanches-container {
@@ -941,11 +978,50 @@ a:focus-visible,
 }
 
 /* ==========================================================================
+   Very Small Screens (< 360px)
+   ========================================================================== */
+@media (max-width: 359px) {
+	.guanches-drawer {
+		width: 100vw;
+		max-width: 100vw;
+	}
+	
+	.guanches-drawer-content {
+		padding: var(--spacing-md);
+	}
+	
+	.guanches-drawer-header {
+		padding: var(--spacing-sm) var(--spacing-md);
+	}
+	
+	.guanches-portlet {
+		margin-bottom: var(--spacing-lg);
+	}
+	
+	.guanches-header-container {
+		padding: var(--spacing-xs) var(--spacing-sm);
+	}
+	
+	.guanches-logo {
+		font-size: var(--font-size-md);
+	}
+	
+	.guanches-site-title {
+		font-size: var(--font-size-lg);
+	}
+	
+	.guanches-user-tools {
+		font-size: var(--font-size-sm);
+	}
+}
+
+/* ==========================================================================
    Print Styles
    ========================================================================== */
 @media print {
 	.guanches-header,
-	.guanches-sidebar,
+	.guanches-drawer,
+	.guanches-drawer-overlay,
 	.guanches-footer,
 	.guanches-toc,
 	.guanches-page-actions {

@@ -44,8 +44,8 @@
 				{{#data-personal-menu}}{{>Portlet}}{{/data-personal-menu}}
 			</div>
 
-			<!-- Mobile menu toggle -->
-			<button class="guanches-menu-toggle" aria-label="{{msg-navigation}}" aria-expanded="false" aria-controls="main-nav">
+			<!-- Mobile menu toggle (opens sidebar drawer) -->
+			<button class="guanches-menu-toggle" aria-label="{{msg-navigation}}" aria-expanded="false" aria-controls="sidebar-drawer">
 				<span class="guanches-menu-toggle-icon"></span>
 			</button>
 		</div>
@@ -62,21 +62,43 @@
 
 	<!-- Main content area -->
 	<div class="guanches-container">
-		<!-- Sidebar (navigation portlets) -->
-		<aside class="guanches-sidebar" role="complementary">
-			{{#data-portlets-sidebar}}
-				{{#array-portlets-rest}}
-					<section class="guanches-portlet guanches-portlet-{{id}}" id="{{id}}" aria-labelledby="{{id}}-title">
-						<h2 id="{{id}}-title" class="guanches-portlet-title">{{label}}</h2>
+		<!-- Sidebar drawer (off-canvas navigation) -->
+		<div class="guanches-drawer-overlay" id="drawer-overlay" aria-hidden="true"></div>
+		<aside class="guanches-drawer" id="sidebar-drawer" role="navigation" aria-label="{{msg-navigation}}" aria-hidden="true">
+			<div class="guanches-drawer-header">
+				<button class="guanches-drawer-close" aria-label="{{msg-hidenavigation}}">
+					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<line x1="18" y1="6" x2="6" y2="18"></line>
+						<line x1="6" y1="6" x2="18" y2="18"></line>
+					</svg>
+				</button>
+				<h2 class="guanches-drawer-title">{{msg-navigation}}</h2>
+			</div>
+			<div class="guanches-drawer-content">
+				<!-- Main navigation (visible only on mobile) -->
+				{{#data-portlets-sidebar.data-portlets-first}}
+					<section class="guanches-portlet guanches-portlet-first guanches-portlet-navigation" aria-labelledby="drawer-navigation-title">
+						<h3 id="drawer-navigation-title" class="guanches-portlet-title">{{msg-navigation}}</h3>
 						<ul class="guanches-portlet-list">
 							{{#html-items}}{{{.}}}{{/html-items}}
 						</ul>
 					</section>
-				{{/array-portlets-rest}}
-			{{/data-portlets-sidebar}}
+				{{/data-portlets-sidebar.data-portlets-first}}
 
-			<!-- Language switcher -->
-			{{#data-portlets.data-languages}}{{>Portlet}}{{/data-portlets.data-languages}}
+				{{#data-portlets-sidebar}}
+					{{#array-portlets-rest}}
+						<section class="guanches-portlet guanches-portlet-{{id}}" id="{{id}}" aria-labelledby="{{id}}-title">
+							<h3 id="{{id}}-title" class="guanches-portlet-title">{{label}}</h3>
+							<ul class="guanches-portlet-list">
+								{{#html-items}}{{{.}}}{{/html-items}}
+							</ul>
+						</section>
+					{{/array-portlets-rest}}
+				{{/data-portlets-sidebar}}
+
+				<!-- Language switcher -->
+				{{#data-portlets.data-languages}}{{>Portlet}}{{/data-portlets.data-languages}}
+			</div>
 		</aside>
 
 		<!-- Main content -->
