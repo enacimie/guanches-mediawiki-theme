@@ -427,6 +427,25 @@ a:focus-visible,
 	border-bottom-color: var(--color-primary);
 }
 
+/* Navigation separator for desktop tools */
+.guanches-nav-separator {
+	display: flex;
+	align-items: center;
+	margin: 0 var(--spacing-sm);
+}
+
+.guanches-nav-separator-line {
+	height: 24px;
+	width: 1px;
+	background-color: var(--color-border);
+	opacity: 0.6;
+}
+
+/* Desktop-specific navigation items */
+.guanches-nav-desktop-item {
+	/* Inherits styles from .guanches-nav-list li */
+}
+
 /* Container (sidebar + main) */
 .guanches-container {
 	display: flex;

@@ -20,6 +20,7 @@
 		setupPortletDropdowns();
 		filterHeaderLinks();
 		enhanceExternalLinks();
+		enhanceMainNav();
 	}
 
 	/**
@@ -350,6 +351,68 @@
 	}
 
 	/**
+	 * Enhance main navigation with additional portlets for desktop
+	 */
+	function enhanceMainNav() {
+		var mainNav = document.getElementById( 'main-nav' );
+		var mainNavList = mainNav ? mainNav.querySelector( '.guanches-nav-list' ) : null;
+		
+		if ( !mainNav || !mainNavList ) {
+			return;
+		}
+		
+		// Remove any previously enhanced items (marked with data-enhanced="true")
+		var enhancedItems = mainNavList.querySelectorAll( '[data-enhanced="true"]' );
+		enhancedItems.forEach( function ( item ) {
+			item.parentNode.removeChild( item );
+		});
+		
+		// Check if we're on desktop (viewport width > 767px)
+		// This is a simple check; CSS handles actual visibility
+		if ( window.innerWidth <= 767 ) {
+			// On mobile, restore original aria-label
+			mainNav.setAttribute( 'aria-label', mw.message( 'navigation' ).exists() ? 
+				mw.message( 'navigation' ).text() : 'Navegación' );
+			return; // Only enhance on desktop
+		}
+		
+		// Find the tools portlet (p-tb) in the drawer
+		var toolsPortlet = document.getElementById( 'p-tb' );
+		if ( !toolsPortlet ) {
+			return;
+		}
+		
+		// Clone the tools list items
+		var toolsList = toolsPortlet.querySelector( '.guanches-portlet-list' );
+		if ( !toolsList || !toolsList.children.length ) {
+			return;
+		}
+		
+		// Create a separator before adding tools
+		var separator = document.createElement( 'li' );
+		separator.className = 'guanches-nav-separator';
+		separator.setAttribute( 'aria-hidden', 'true' );
+		separator.setAttribute( 'data-enhanced', 'true' );
+		separator.innerHTML = '<span class="guanches-nav-separator-line"></span>';
+		
+		// Append separator and tools items
+		mainNavList.appendChild( separator );
+		
+		// Clone each tool item and add to main nav
+		Array.from( toolsList.children ).forEach( function ( item ) {
+			var clone = item.cloneNode( true );
+			// Add desktop-specific class and mark as enhanced
+			clone.classList.add( 'guanches-nav-desktop-item' );
+			clone.setAttribute( 'data-enhanced', 'true' );
+			mainNavList.appendChild( clone );
+		});
+		
+		// Update ARIA attributes
+		mainNav.setAttribute( 'aria-label', mw.message( 'navigation-and-tools' ).exists() ? 
+			mw.message( 'navigation-and-tools' ).text() : 'Navegación y herramientas' );
+	}
+
+	/**
 	 * Debounce function for resize events
 	 */
 	function debounce( func, wait ) {
@@ -368,6 +431,7 @@
 	window.addEventListener( 'resize', debounce( function () {
 		setupPortletDropdowns();
 		setupTableOfContents();
+		enhanceMainNav();
 	}, 250 ) );
 
 	// Make functions available globally for debugging
@@ -377,7 +441,8 @@
 		setupSkipLink: setupSkipLink,
 		setupPortletDropdowns: setupPortletDropdowns,
 		filterHeaderLinks: filterHeaderLinks,
-		enhanceExternalLinks: enhanceExternalLinks
+		enhanceExternalLinks: enhanceExternalLinks,
+		enhanceMainNav: enhanceMainNav
 	};
 
 }() );
