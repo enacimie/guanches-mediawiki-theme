@@ -395,6 +395,148 @@
 		enhanceMainNav();
 	}, 250 ) );
 
+	/**
+	 * Theme toggler functionality
+	 */
+	function setupThemeToggle() {
+		var themeToggle = document.querySelector('.guanches-theme-toggle');
+		if (!themeToggle) {
+			return;
+		}
+
+		// Check for saved theme preference or respect OS preference
+		const savedTheme = localStorage.getItem('theme');
+		const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+		
+		if (savedTheme === 'dark' || (!savedTheme && prefersDarkScheme.matches)) {
+			document.documentElement.setAttribute('data-theme', 'dark');
+		} else {
+			document.documentElement.setAttribute('data-theme', 'light');
+		}
+
+		themeToggle.addEventListener('click', function(e) {
+			e.preventDefault();
+			
+			const currentTheme = document.documentElement.getAttribute('data-theme');
+			const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+			
+			document.documentElement.setAttribute('data-theme', newTheme);
+			localStorage.setItem('theme', newTheme);
+			
+			// Update icon based on theme
+			updateThemeIcon(newTheme);
+		});
+
+		// Initialize icon based on current theme
+		const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+		updateThemeIcon(currentTheme);
+	}
+
+	/**
+	 * Update theme toggle icon based on current theme
+	 */
+	function updateThemeIcon(theme) {
+		var themeIcon = document.querySelector('.theme-icon');
+		if (!themeIcon) {
+			return;
+		}
+
+		// Clear existing paths
+		while (themeIcon.firstChild) {
+			themeIcon.removeChild(themeIcon.firstChild);
+		}
+
+		if (theme === 'dark') {
+			// Moon icon for dark mode
+			var moonPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+			moonPath.setAttribute('d', 'M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 1 21 12.79z');
+			themeIcon.appendChild(moonPath);
+		} else {
+			// Sun icon for light mode
+			var sunCircle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+			sunCircle.setAttribute('cx', '12');
+			sunCircle.setAttribute('cy', '12');
+			sunCircle.setAttribute('r', '5');
+			themeIcon.appendChild(sunCircle);
+			
+			var sunRays = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+			for (let i = 0; i < 8; i++) {
+				let ray = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+				ray.setAttribute('x1', '12');
+				ray.setAttribute('y1', '1');
+				ray.setAttribute('x2', '12');
+				ray.setAttribute('y2', '3');
+				ray.setAttribute('transform', `rotate(${i * 45} 12 12)`);
+				sunRays.appendChild(ray);
+			}
+			themeIcon.appendChild(sunRays);
+		}
+	}
+
+	/**
+	 * Setup language selector dropdown
+	 */
+	function setupLanguageSelector() {
+		var langSelectorBtn = document.querySelector('.language-selector-btn');
+		if (!langSelectorBtn) {
+			return;
+		}
+
+		var langPortlet = langSelectorBtn.nextElementSibling;
+		if (!langPortlet || !langPortlet.classList.contains('guanches-portlet')) {
+			// If there's no portlet next to the button, create a simple dropdown
+			console.log('Language portlet not found next to selector button');
+			return;
+		}
+
+		// Initially hide the language portlet
+		langPortlet.style.display = 'none';
+		langPortlet.classList.add('language-dropdown');
+
+		langSelectorBtn.addEventListener('click', function(e) {
+			e.preventDefault();
+			
+			var isExpanded = langSelectorBtn.getAttribute('aria-expanded') === 'true';
+			var newExpandedState = !isExpanded;
+			
+			langSelectorBtn.setAttribute('aria-expanded', newExpandedState.toString());
+			langPortlet.style.display = newExpandedState ? 'block' : 'none';
+			
+			// Position the dropdown below the button
+			if (newExpandedState) {
+				var btnRect = langSelectorBtn.getBoundingClientRect();
+				langPortlet.style.position = 'absolute';
+				langPortlet.style.top = 'calc(100% + 4px)';
+				langPortlet.style.right = '0';
+				langPortlet.style.zIndex = 'var(--z-dropdown)';
+				langPortlet.style.boxShadow = 'var(--shadow-md)';
+				langPortlet.style.backgroundColor = 'var(--color-background)';
+				langPortlet.style.border = '1px solid var(--color-border)';
+				langPortlet.style.borderRadius = 'var(--radius-md)';
+				langPortlet.style.padding = 'var(--spacing-md)';
+			}
+		});
+
+		// Close dropdown when clicking outside
+		document.addEventListener('click', function(e) {
+			if (!langSelectorBtn.contains(e.target) && !langPortlet.contains(e.target)) {
+				langSelectorBtn.setAttribute('aria-expanded', 'false');
+				langPortlet.style.display = 'none';
+			}
+		});
+	}
+
+	// Initialize theme toggle when DOM is ready
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', function() {
+			setupThemeToggle();
+			setupLanguageSelector();
+		});
+	} else {
+		setupThemeToggle();
+		setupLanguageSelector();
+	}
+
 	// Make functions available globally for debugging
 	window.guanchesSkin = {
 		setupMobileMenu: setupMobileMenu,
@@ -403,7 +545,9 @@
 		setupPortletDropdowns: setupPortletDropdowns,
 		filterHeaderLinks: filterHeaderLinks,
 		enhanceExternalLinks: enhanceExternalLinks,
-		enhanceMainNav: enhanceMainNav
+		enhanceMainNav: enhanceMainNav,
+		setupThemeToggle: setupThemeToggle,
+		setupLanguageSelector: setupLanguageSelector
 	};
 
 }() );
