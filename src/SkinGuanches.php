@@ -28,8 +28,15 @@ class SkinGuanches extends SkinMustache {
 			$data['link-search-action'] = $this->getConfig()->get( 'ScriptPath' ) . '/index.php';
 		}
 		
-		// Add helper class for dark mode if user preference exists (server-side hint)
-		// Note: Actual toggle is often client-side, but we can check user options here via $this->getUser()
+		// Populate custom navigation links for the secondary navbar
+		$services = \MediaWiki\MediaWikiServices::getInstance();
+		$titleFactory = $services->getTitleFactory();
+		
+		$data['link-mainpage'] = \Title::newMainPage()->getLinkURL();
+		$data['link-portal'] = \Title::newFromText( 'Project:Portal' )->getLinkURL();
+		$data['link-currentevents'] = \Title::newFromText( 'Project:Current_events' )->getLinkURL();
+		$data['link-recentchanges'] = \SpecialPage::getTitleFor( 'Recentchanges' )->getLinkURL();
+		$data['link-randompage'] = \SpecialPage::getTitleFor( 'Random' )->getLinkURL();
 		
 		return $data;
 	}

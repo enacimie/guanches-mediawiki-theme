@@ -446,6 +446,12 @@ a:focus-visible,
 	height: 40px;
 	background-color: var(--color-primary);
 	border-radius: var(--radius-md);
+	color: var(--color-white);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: 700;
+	font-size: 1.5rem;
 }
 
 .guanches-site-title {
@@ -866,8 +872,8 @@ a:focus-visible,
 
 .notification-badge {
 	position: absolute;
-	top: -5px;
-	right: -5px;
+	top: -2px; /* Adjusted from -5px to prevent touching top edge */
+	right: -2px;
 	background-color: var(--color-accent);
 	color: white;
 	border-radius: 50%;
