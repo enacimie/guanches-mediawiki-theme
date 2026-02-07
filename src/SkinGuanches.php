@@ -4,6 +4,9 @@ namespace MediaWiki\Skins\Guanches;
 
 use SkinMustache;
 use OutputPage;
+use MediaWiki\MediaWikiServices;
+use MediaWiki\Title\Title;
+use MediaWiki\SpecialPage\SpecialPage;
 
 /**
  * SkinGuanches class
@@ -29,14 +32,13 @@ class SkinGuanches extends SkinMustache {
 		}
 		
 		// Populate custom navigation links for the secondary navbar
-		$services = \MediaWiki\MediaWikiServices::getInstance();
-		$titleFactory = $services->getTitleFactory();
+		// We use Title and SpecialPage classes with proper namespacing for MW 1.45+
 		
-		$data['link-mainpage'] = \Title::newMainPage()->getLinkURL();
-		$data['link-portal'] = \Title::newFromText( 'Project:Portal' )->getLinkURL();
-		$data['link-currentevents'] = \Title::newFromText( 'Project:Current_events' )->getLinkURL();
-		$data['link-recentchanges'] = \SpecialPage::getTitleFor( 'Recentchanges' )->getLinkURL();
-		$data['link-randompage'] = \SpecialPage::getTitleFor( 'Random' )->getLinkURL();
+		$data['link-mainpage'] = Title::newMainPage()->getLinkURL();
+		$data['link-portal'] = Title::newFromText( 'Project:Portal' )->getLinkURL();
+		$data['link-currentevents'] = Title::newFromText( 'Project:Current_events' )->getLinkURL();
+		$data['link-recentchanges'] = SpecialPage::getTitleFor( 'Recentchanges' )->getLinkURL();
+		$data['link-randompage'] = SpecialPage::getTitleFor( 'Random' )->getLinkURL();
 		
 		return $data;
 	}
