@@ -67,7 +67,7 @@
 			<div class="guanches-user-tools">
 				{{#data-personal-menu}}{{>Portlet}}{{/data-personal-menu}}
 				<button class="guanches-theme-toggle" aria-label="Alternar modo claro/oscuro" title="Alternar tema">
-					<svg class="theme-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<svg class="theme-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 						<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 1 21 12.79z"></path>
 					</svg>
 				</button>
@@ -80,14 +80,14 @@
 		<div class="guanches-secondary-nav-container">
 			<ul class="guanches-secondary-nav-list">
 				<li><a href="{{link-mainpage}}" title="Portada">
-					<svg class="nav-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<svg class="nav-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 						<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
 						<polyline points="9,22 9,12 15,12 15,22"></polyline>
 					</svg>
 					<span>{{msg-mainpage}}</span>
 				</a></li>
 				<li><a href="{{link-portal}}" title="Portal de la comunidad">
-					<svg class="nav-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<svg class="nav-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 						<circle cx="12" cy="12" r="10"></circle>
 						<line x1="12" y1="8" x2="12" y2="12"></line>
 						<line x1="12" y1="16" x2="12.01" y2="16"></line>
@@ -95,14 +95,14 @@
 					<span>{{msg-portal}}</span>
 				</a></li>
 				<li><a href="{{link-currentevents}}" title="Actualidad">
-					<svg class="nav-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<svg class="nav-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 						<circle cx="12" cy="12" r="10"></circle>
 						<polyline points="12,6 12,12 16,14"></polyline>
 					</svg>
 					<span>{{msg-currentevents}}</span>
 				</a></li>
 				<li><a href="{{link-recentchanges}}" title="Cambios recientes">
-					<svg class="nav-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<svg class="nav-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 						<polyline points="23,4 23,10 17,10"></polyline>
 						<polyline points="1,20 1,14 7,14"></polyline>
 						<path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
@@ -110,7 +110,7 @@
 					<span>{{msg-recentchanges}}</span>
 				</a></li>
 				<li><a href="{{link-randompage}}" title="Página aleatoria">
-					<svg class="nav-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<svg class="nav-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 						<circle cx="12" cy="12" r="10"></circle>
 						<path d="M16 16s-1.5-2-4-2-4 2-4 2"></path>
 						<line x1="9" y1="9" x2="9.01" y2="9"></line>
@@ -134,13 +134,13 @@
 				{{#data-portlets.data-languages}}
 					<li class="guanches-language-selector">
 						<button class="language-selector-btn" aria-expanded="false" aria-haspopup="true">
-							<svg class="language-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+							<svg class="language-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 								<circle cx="12" cy="12" r="10"></circle>
 								<line x1="2" y1="12" x2="22" y2="12"></line>
 								<path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
 							</svg>
 							<span class="language-text">Idioma</span>
-							<svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+							<svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 								<polyline points="6,9 12,15 18,9"></polyline>
 							</svg>
 						</button>
