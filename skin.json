@@ -48,6 +48,9 @@
 			]
 		}
 	},
+	"AutoloadClasses": {
+		"MediaWiki\\Skins\\Guanches\\SkinGuanches": "src/SkinGuanches.php"
+	},
 	"MessagesDirs": {
 		"Guanches": [
 			"i18n"
