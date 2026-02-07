@@ -8,25 +8,6 @@
 	{{{html-head-items}}}
 </head>
 <body class="skin-guanches mw-body {{html-body-classes}}">
-	<script>
-		// Remove no-js class and add js class for CSS enhancements
-		document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/, 'js');
-		
-		// Fix empty form action and aria-labels if needed
-		document.addEventListener('DOMContentLoaded', function() {
-			// Fix search form action if empty
-			var searchForm = document.getElementById('searchform');
-			if (searchForm && (!searchForm.getAttribute('action') || searchForm.getAttribute('action') === '')) {
-				searchForm.setAttribute('action', '/Especial:Buscar');
-			}
-			
-			// Fix drawer close button aria-label if empty
-			var drawerClose = document.querySelector('.guanches-drawer-close');
-			if (drawerClose && (!drawerClose.getAttribute('aria-label') || drawerClose.getAttribute('aria-label') === '')) {
-				drawerClose.setAttribute('aria-label', 'Ocultar navegación');
-			}
-		});
-	</script>
 	<!-- Skip to main content link for accessibility -->
 	<a class="guanches-skip-link" href="#mw-content">{{msg-skiptomaincontent}}</a>
 

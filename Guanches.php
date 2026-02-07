@@ -9,9 +9,8 @@
 
 if ( function_exists( 'wfLoadSkin' ) ) {
 	wfLoadSkin( 'Guanches' );
-	// Keep i18n globals for backward compatibility
-	$wgMessagesDirs['Guanches'] = __DIR__ . '/i18n';
+	// Registration is now handled via skin.json
 	return true;
 } else {
-	die( 'This version of the Guanches skin requires MediaWiki 1.25+' );
+	die( 'This version of the Guanches skin requires MediaWiki 1.45+' );
 }

@@ -28,8 +28,8 @@
 		"installer-name": "Guanches"
 	},
 	"autoload": {
-		"classmap": [
-			"Guanches.php"
-		]
+		"psr-4": {
+			"MediaWiki\\Skins\\Guanches\\": "src/"
+		}
 	}
 }

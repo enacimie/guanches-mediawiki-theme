@@ -10,11 +10,11 @@
 	"license-name": "GPL-3.0-or-later",
 	"type": "skin",
 	"requires": {
-		"MediaWiki": ">= 1.41.0"
+		"MediaWiki": ">= 1.45.0"
 	},
 	"ValidSkinNames": {
 		"guanches": {
-			"class": "SkinMustache",
+			"class": "MediaWiki\\Skins\\Guanches\\SkinGuanches",
 			"args": [
 				{
 					"name": "guanches",
@@ -30,6 +30,8 @@
 						"guanches-skin-desc"
 					],
 					"styles": [
+						"mediawiki.skinning.interface",
+						"codex-styles",
 						"mediawiki.ui.icon",
 						"mediawiki.ui.button",
 						"skins.guanches.styles"
@@ -87,6 +89,12 @@
 		"localBasePath": "",
 		"remoteSkinPath": "Guanches"
 	},
-	"ResourceModuleSkinStyles": {},
+	"ResourceModuleSkinStyles": {
+		"guanches": {
+			"common": [
+				"skins.guanches.styles"
+			]
+		}
+	},
 	"manifest_version": 2
 }
