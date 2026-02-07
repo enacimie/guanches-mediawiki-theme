@@ -33,6 +33,11 @@
 	<!-- Header -->
 	<header class="guanches-header" role="banner">
 		<div class="guanches-header-container">
+			<!-- Mobile menu toggle (opens sidebar drawer) -->
+			<button class="guanches-menu-toggle" aria-label="{{msg-navigation}}" aria-expanded="false" aria-controls="sidebar-drawer">
+				<span class="guanches-menu-toggle-icon"></span>
+			</button>
+
 			<!-- Logo and site title -->
 			<div class="guanches-logo-area">
 				<a href="{{link-mainpage}}" class="guanches-logo" title="{{msg-sitetitle}}" aria-label="{{msg-sitetitle}}">
@@ -62,21 +67,7 @@
 			<div class="guanches-user-tools">
 				{{#data-personal-menu}}{{>Portlet}}{{/data-personal-menu}}
 			</div>
-
-			<!-- Mobile menu toggle (opens sidebar drawer) -->
-			<button class="guanches-menu-toggle" aria-label="{{msg-navigation}}" aria-expanded="false" aria-controls="sidebar-drawer">
-				<span class="guanches-menu-toggle-icon"></span>
-			</button>
 		</div>
-
-		<!-- Main navigation -->
-		<nav id="main-nav" class="guanches-main-nav" role="navigation" aria-label="{{msg-navigation}}">
-			<ul class="guanches-nav-list">
-				{{#data-portlets-sidebar.data-portlets-first}}
-					{{#html-items}}{{{.}}}{{/html-items}}
-				{{/data-portlets-sidebar.data-portlets-first}}
-			</ul>
-		</nav>
 	</header>
 
 	<!-- Main content area -->
@@ -94,7 +85,7 @@
 				<h2 class="guanches-drawer-title">{{msg-navigation}}</h2>
 			</div>
 			<div class="guanches-drawer-content">
-				<!-- Main navigation (visible only on mobile) -->
+				<!-- Main navigation -->
 				{{#data-portlets-sidebar.data-portlets-first}}
 					<section class="guanches-portlet guanches-portlet-first guanches-portlet-navigation" aria-labelledby="drawer-navigation-title">
 						<h3 id="drawer-navigation-title" class="guanches-portlet-title">{{msg-navigation}}</h3>
@@ -115,14 +106,14 @@
 					{{/array-portlets-rest}}
 				{{/data-portlets-sidebar}}
 
-				<!-- Language switcher -->
-				{{#data-portlets.data-languages}}{{>Portlet}}{{/data-portlets.data-languages}}
-
 				<!-- Personal tools (user menu) -->
 				{{#data-portlets.data-personal}}{{>Portlet}}{{/data-portlets.data-personal}}
 
 				<!-- Page actions (edit, history, etc.) -->
 				{{#data-portlets.data-actions}}{{>Portlet}}{{/data-portlets.data-actions}}
+
+				<!-- Language switcher -->
+				{{#data-portlets.data-languages}}{{>Portlet}}{{/data-portlets.data-languages}}
 
 				<!-- Variants (language variants) -->
 				{{#data-portlets.data-variants}}{{>Portlet}}{{/data-portlets.data-variants}}
@@ -159,7 +150,7 @@
 			</div>
 
 			<!-- Categories -->
-			{{#html-categories}}{{.}}{{/html-categories}}
+			{{{html-categories}}}
 		</main>
 	</div>
 

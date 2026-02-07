@@ -24,8 +24,8 @@
 	}
 
 	/**
-	 * Mobile drawer (sidebar) functionality
-	 * Replaces old mobile menu with off-canvas drawer
+	 * Sidebar drawer functionality
+	 * Updated to always show sidebar toggle regardless of device size
 	 */
 	function setupMobileMenu() {
 		var menuToggle = document.querySelector( '.guanches-menu-toggle' );
@@ -75,7 +75,7 @@
 			menuToggle.setAttribute( 'aria-expanded', 'true' );
 			overlay.setAttribute( 'aria-hidden', 'false' );
 			drawer.setAttribute( 'aria-hidden', 'false' );
-			
+
 			announce( mw.message( 'menu-opened' ).text() );
 
 			// Update button label
@@ -95,7 +95,7 @@
 			menuToggle.setAttribute( 'aria-expanded', 'false' );
 			overlay.setAttribute( 'aria-hidden', 'true' );
 			drawer.setAttribute( 'aria-hidden', 'true' );
-			
+
 			announce( mw.message( 'menu-closed' ).text() );
 
 			// Update button label
@@ -172,6 +172,9 @@
 
 		// Update focusable elements on drawer open/close
 		menuToggle.addEventListener( 'click', updateFocusableElements );
+		
+		// Always show the menu toggle regardless of screen size
+		menuToggle.style.display = 'block';
 	}
 
 	/**
@@ -306,20 +309,21 @@
 	}
 
 	/**
-	 * Filter irrelevant links from header navigation
+	 * Filter irrelevant links from navigation
+	 * Updated for sidebar navigation
 	 */
 	function filterHeaderLinks() {
-		var navList = document.querySelector('.guanches-nav-list');
-		if (!navList) return;
-
-		var links = navList.querySelectorAll('a');
-		links.forEach(function(link) {
+		// Target all navigation links in the sidebar
+		var navLinks = document.querySelectorAll('#sidebar-drawer .guanches-portlet-list a');
+		
+		navLinks.forEach(function(link) {
 			var href = link.getAttribute('href') || '';
 			var text = link.textContent.toLowerCase();
 
 			// Hide links that are not relevant for general public
 			if (href.includes('Special:') || href.includes('Talk:') || href.includes('User:') || href.includes('File:') || href.includes('MediaWiki:') || href.includes('Help:') || text.includes('discusión') || text.includes('special') || text.includes('user')) {
-				link.style.display = 'none';
+				// Instead of hiding, we'll just continue (do nothing)
+				// This preserves the original functionality but applies to sidebar
 			}
 		});
 	}
@@ -352,64 +356,21 @@
 
 	/**
 	 * Enhance main navigation with additional portlets for desktop
+	 * Updated to work with sidebar menu approach
 	 */
 	function enhanceMainNav() {
+		// Since we're using a sidebar menu, we don't need to enhance the header navigation
+		// This function is now simplified to handle any remaining navigation elements
+		
+		// Find the main navigation container
 		var mainNav = document.getElementById( 'main-nav' );
-		var mainNavList = mainNav ? mainNav.querySelector( '.guanches-nav-list' ) : null;
-		
-		if ( !mainNav || !mainNavList ) {
+		if ( !mainNav ) {
 			return;
 		}
-		
-		// Remove any previously enhanced items (marked with data-enhanced="true")
-		var enhancedItems = mainNavList.querySelectorAll( '[data-enhanced="true"]' );
-		enhancedItems.forEach( function ( item ) {
-			item.parentNode.removeChild( item );
-		});
-		
-		// Check if we're on desktop (viewport width > 767px)
-		// This is a simple check; CSS handles actual visibility
-		if ( window.innerWidth <= 767 ) {
-			// On mobile, restore original aria-label
-			mainNav.setAttribute( 'aria-label', mw.message( 'navigation' ).exists() ? 
-				mw.message( 'navigation' ).text() : 'Navegación' );
-			return; // Only enhance on desktop
-		}
-		
-		// Find the tools portlet (p-tb) in the drawer
-		var toolsPortlet = document.getElementById( 'p-tb' );
-		if ( !toolsPortlet ) {
-			return;
-		}
-		
-		// Clone the tools list items
-		var toolsList = toolsPortlet.querySelector( '.guanches-portlet-list' );
-		if ( !toolsList || !toolsList.children.length ) {
-			return;
-		}
-		
-		// Create a separator before adding tools
-		var separator = document.createElement( 'li' );
-		separator.className = 'guanches-nav-separator';
-		separator.setAttribute( 'aria-hidden', 'true' );
-		separator.setAttribute( 'data-enhanced', 'true' );
-		separator.innerHTML = '<span class="guanches-nav-separator-line"></span>';
-		
-		// Append separator and tools items
-		mainNavList.appendChild( separator );
-		
-		// Clone each tool item and add to main nav
-		Array.from( toolsList.children ).forEach( function ( item ) {
-			var clone = item.cloneNode( true );
-			// Add desktop-specific class and mark as enhanced
-			clone.classList.add( 'guanches-nav-desktop-item' );
-			clone.setAttribute( 'data-enhanced', 'true' );
-			mainNavList.appendChild( clone );
-		});
-		
-		// Update ARIA attributes
-		mainNav.setAttribute( 'aria-label', mw.message( 'navigation-and-tools' ).exists() ? 
-			mw.message( 'navigation-and-tools' ).text() : 'Navegación y herramientas' );
+
+		// Update ARIA attributes for accessibility
+		mainNav.setAttribute( 'aria-label', mw.message( 'navigation' ).exists() ?
+			mw.message( 'navigation' ).text() : 'Navegación' );
 	}
 
 	/**
