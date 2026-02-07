@@ -183,7 +183,9 @@
 		<header class="guanches-page-header">
 			<h1 class="guanches-page-title">{{{html-title}}}</h1>
 			<div class="guanches-page-actions">
-				{{#data-portlets.data-actions}}{{>Portlet}}{{/data-portlets.data-actions}}
+				{{#data-portlets.namespaces}}{{>Portlet}}{{/data-portlets.namespaces}}
+				{{#data-portlets.views}}{{>Portlet}}{{/data-portlets.views}}
+				{{#data-portlets.actions}}{{>Portlet}}{{/data-portlets.actions}}
 			</div>
 		</header>
 

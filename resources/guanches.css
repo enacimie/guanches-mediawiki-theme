@@ -705,6 +705,53 @@ a:focus-visible,
 	display: flex;
 	gap: var(--spacing-sm);
 	flex-wrap: wrap;
+	align-items: center;
+	margin-top: var(--spacing-md);
+}
+
+/* Hide titles (Views, Namespaces, Actions) inside page actions */
+.guanches-page-actions .guanches-portlet-title {
+	display: none;
+}
+
+/* Style lists as button groups */
+.guanches-page-actions .guanches-portlet-list {
+	display: flex;
+	gap: var(--spacing-xs);
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+.guanches-page-actions .guanches-portlet-list li {
+	margin: 0;
+}
+
+/* Style links as buttons */
+.guanches-page-actions .guanches-portlet-list a {
+	display: inline-block;
+	padding: var(--spacing-xs) var(--spacing-md);
+	background-color: var(--color-surface);
+	border: 1px solid var(--color-border);
+	border-radius: var(--radius-md);
+	text-decoration: none;
+	font-size: var(--font-size-sm);
+	font-weight: 600;
+	color: var(--color-text);
+	transition: all var(--transition-fast);
+}
+
+.guanches-page-actions .guanches-portlet-list a:hover {
+	background-color: var(--color-primary-light);
+	color: var(--color-white);
+	border-color: var(--color-primary);
+}
+
+/* Selected/Active state (needs implementation in PHP or JS usually, but MW adds 'selected' class to li) */
+.guanches-page-actions .guanches-portlet-list li.selected a {
+	background-color: var(--color-primary);
+	color: var(--color-white);
+	border-color: var(--color-primary);
 }
 
 /* Table of contents */
