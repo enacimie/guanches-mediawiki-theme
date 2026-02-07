@@ -1,244 +1,229 @@
-<!DOCTYPE html>
-<html class="no-js" lang="{{html-user-language}}" dir="{{html-user-direction}}">
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>{{{html-title}}}</title>
-	{{{html-head}}}
-	{{{html-head-items}}}
-</head>
-<body class="skin-guanches mw-body {{html-body-classes}}">
-	<!-- Skip to main content link for accessibility -->
-	<a class="guanches-skip-link" href="#mw-content">{{msg-skiptomaincontent}}</a>
+<!-- Skip to main content link for accessibility -->
+<a class="guanches-skip-link" href="#mw-content">{{msg-skiptomaincontent}}</a>
 
-	<!-- Header -->
-	<header class="guanches-header" role="banner">
-		<div class="guanches-header-container">
-			<!-- Mobile menu toggle (opens sidebar drawer) -->
-			<button class="guanches-menu-toggle" aria-label="{{msg-navigation}}" aria-expanded="false" aria-controls="sidebar-drawer">
-				<span class="guanches-menu-toggle-icon"></span>
+<!-- Header -->
+<header class="guanches-header" role="banner">
+	<div class="guanches-header-container">
+		<!-- Mobile menu toggle (opens sidebar drawer) -->
+		<button class="guanches-menu-toggle" aria-label="{{msg-navigation}}" aria-expanded="false" aria-controls="sidebar-drawer">
+			<span class="guanches-menu-toggle-icon"></span>
+		</button>
+
+		<!-- Logo and site title -->
+		<div class="guanches-logo-area">
+			<a href="{{link-mainpage}}" class="guanches-logo" title="{{msg-sitetitle}}" aria-label="{{msg-sitetitle}}">
+				{{#data-logos}}
+					{{#icon}}<img src="{{.}}" width="40" height="40" alt="{{msg-sitetitle}}" class="guanches-logo-icon">{{/icon}}
+					{{^icon}}<div class="guanches-logo-placeholder"></div>{{/icon}}
+				{{/data-logos}}
+				<span class="guanches-site-title">{{msg-sitetitle}}</span>
+				{{#msg-tagline}}<span class="guanches-tagline">{{.}}</span>{{/msg-tagline}}
+			</a>
+		</div>
+
+		<!-- Search box -->
+		<div class="guanches-search">
+			<form action="{{link-search-action}}" id="searchform" method="get" role="search">
+				<input type="search" name="search" placeholder="{{msg-search}}" aria-label="{{msg-search}}" class="guanches-search-input">
+				<button type="submit" class="guanches-search-button" title="{{msg-search}}" aria-label="{{msg-search}}">
+					<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<circle cx="11" cy="11" r="8"></circle>
+						<line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+					</svg>
+				</button>
+			</form>
+		</div>
+
+		<!-- User menu and personal tools -->
+		<div class="guanches-user-tools">
+			{{#data-personal-menu}}{{>Portlet}}{{/data-personal-menu}}
+			<button class="guanches-theme-toggle" aria-label="Alternar modo claro/oscuro" title="Alternar tema">
+				<svg class="theme-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+					<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 1 21 12.79z"></path>
+				</svg>
 			</button>
+		</div>
+	</div>
+</header>
 
-			<!-- Logo and site title -->
-			<div class="guanches-logo-area">
-				<a href="{{link-mainpage}}" class="guanches-logo" title="{{msg-sitetitle}}" aria-label="{{msg-sitetitle}}">
-					{{#data-logos}}
-						{{#icon}}<img src="{{.}}" width="40" height="40" alt="{{msg-sitetitle}}" class="guanches-logo-icon">{{/icon}}
-						{{^icon}}<div class="guanches-logo-placeholder"></div>{{/icon}}
-					{{/data-logos}}
-					<span class="guanches-site-title">{{msg-sitetitle}}</span>
-					{{#msg-tagline}}<span class="guanches-tagline">{{.}}</span>{{/msg-tagline}}
-				</a>
-			</div>
-
-			<!-- Search box -->
-			<div class="guanches-search">
-				<form action="{{link-search-action}}" id="searchform" method="get" role="search">
-					<input type="search" name="search" placeholder="{{msg-search}}" aria-label="{{msg-search}}" class="guanches-search-input">
-					<button type="submit" class="guanches-search-button" title="{{msg-search}}" aria-label="{{msg-search}}">
-						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-							<circle cx="11" cy="11" r="8"></circle>
-							<line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+<!-- Secondary navigation bar -->
+<nav class="guanches-secondary-nav" role="navigation" aria-label="Navegación secundaria">
+	<div class="guanches-secondary-nav-container">
+		<ul class="guanches-secondary-nav-list">
+			<li><a href="{{link-mainpage}}" title="Portada">
+				<svg class="nav-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+					<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+					<polyline points="9,22 9,12 15,12 15,22"></polyline>
+				</svg>
+				<span>{{msg-mainpage}}</span>
+			</a></li>
+			<li><a href="{{link-portal}}" title="Portal de la comunidad">
+				<svg class="nav-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+					<circle cx="12" cy="12" r="10"></circle>
+					<line x1="12" y1="8" x2="12" y2="12"></line>
+					<line x1="12" y1="16" x2="12.01" y2="16"></line>
+				</svg>
+				<span>{{msg-portal}}</span>
+			</a></li>
+			<li><a href="{{link-currentevents}}" title="Actualidad">
+				<svg class="nav-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+					<circle cx="12" cy="12" r="10"></circle>
+					<polyline points="12,6 12,12 16,14"></polyline>
+				</svg>
+				<span>{{msg-currentevents}}</span>
+			</a></li>
+			<li><a href="{{link-recentchanges}}" title="Cambios recientes">
+				<svg class="nav-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+					<polyline points="23,4 23,10 17,10"></polyline>
+					<polyline points="1,20 1,14 7,14"></polyline>
+					<path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+				</svg>
+				<span>{{msg-recentchanges}}</span>
+			</a></li>
+			<li><a href="{{link-randompage}}" title="Página aleatoria">
+				<svg class="nav-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+					<circle cx="12" cy="12" r="10"></circle>
+					<path d="M16 16s-1.5-2-4-2-4 2-4 2"></path>
+					<line x1="9" y1="9" x2="9.01" y2="9"></line>
+					<line x1="15" y1="9" x2="15.01" y2="9"></line>
+				</svg>
+				<span>{{msg-randompage}}</span>
+			</a></li>
+		</ul>
+		
+		<!-- Right-aligned items -->
+		<ul class="guanches-secondary-nav-list guanches-secondary-nav-list-right">
+			{{#data-portlets.data-notifications}}
+				<li class="guanches-notification-item">
+					<div class="notification-wrapper">
+						{{>Portlet}}
+						<span class="notification-badge" id="notification-count">3</span>
+					</div>
+				</li>
+			{{/data-portlets.data-notifications}}
+			
+			{{#data-portlets.data-languages}}
+				<li class="guanches-language-selector">
+					<button class="language-selector-btn" aria-expanded="false" aria-haspopup="true">
+						<svg class="language-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+							<circle cx="12" cy="12" r="10"></circle>
+							<line x1="2" y1="12" x2="22" y2="12"></line>
+							<path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+						</svg>
+						<span class="language-text">Idioma</span>
+						<svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+							<polyline points="6,9 12,15 18,9"></polyline>
 						</svg>
 					</button>
-				</form>
-			</div>
+					{{>Portlet}}
+				</li>
+			{{/data-portlets.data-languages}}
+		</ul>
+	</div>
+</nav>
 
-			<!-- User menu and personal tools -->
-			<div class="guanches-user-tools">
-				{{#data-personal-menu}}{{>Portlet}}{{/data-personal-menu}}
-				<button class="guanches-theme-toggle" aria-label="Alternar modo claro/oscuro" title="Alternar tema">
-					<svg class="theme-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-						<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 1 21 12.79z"></path>
-					</svg>
-				</button>
-			</div>
+<!-- Main content area -->
+<div class="guanches-container">
+	<!-- Sidebar drawer (off-canvas navigation) -->
+	<div class="guanches-drawer-overlay" id="drawer-overlay" aria-hidden="true"></div>
+	<aside class="guanches-drawer" id="sidebar-drawer" role="navigation" aria-label="{{msg-navigation}}" aria-hidden="true">
+		<div class="guanches-drawer-header">
+			<button class="guanches-drawer-close" aria-label="{{msg-hidenavigation}}">
+				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<line x1="18" y1="6" x2="6" y2="18"></line>
+					<line x1="6" y1="6" x2="18" y2="18"></line>
+				</svg>
+			</button>
+			<h2 class="guanches-drawer-title">{{msg-navigation}}</h2>
 		</div>
-	</header>
+		<div class="guanches-drawer-content">
+			<!-- Main navigation -->
+			{{#data-portlets-sidebar.data-portlets-first}}
+				<section class="guanches-portlet guanches-portlet-first guanches-portlet-navigation" aria-labelledby="drawer-navigation-title">
+					<h3 id="drawer-navigation-title" class="guanches-portlet-title">{{msg-navigation}}</h3>
+					<ul class="guanches-portlet-list">
+						{{#html-items}}{{{.}}}{{/html-items}}
+					</ul>
+				</section>
+			{{/data-portlets-sidebar.data-portlets-first}}
 
-	<!-- Secondary navigation bar -->
-	<nav class="guanches-secondary-nav" role="navigation" aria-label="Navegación secundaria">
-		<div class="guanches-secondary-nav-container">
-			<ul class="guanches-secondary-nav-list">
-				<li><a href="{{link-mainpage}}" title="Portada">
-					<svg class="nav-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-						<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-						<polyline points="9,22 9,12 15,12 15,22"></polyline>
-					</svg>
-					<span>{{msg-mainpage}}</span>
-				</a></li>
-				<li><a href="{{link-portal}}" title="Portal de la comunidad">
-					<svg class="nav-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-						<circle cx="12" cy="12" r="10"></circle>
-						<line x1="12" y1="8" x2="12" y2="12"></line>
-						<line x1="12" y1="16" x2="12.01" y2="16"></line>
-					</svg>
-					<span>{{msg-portal}}</span>
-				</a></li>
-				<li><a href="{{link-currentevents}}" title="Actualidad">
-					<svg class="nav-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-						<circle cx="12" cy="12" r="10"></circle>
-						<polyline points="12,6 12,12 16,14"></polyline>
-					</svg>
-					<span>{{msg-currentevents}}</span>
-				</a></li>
-				<li><a href="{{link-recentchanges}}" title="Cambios recientes">
-					<svg class="nav-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-						<polyline points="23,4 23,10 17,10"></polyline>
-						<polyline points="1,20 1,14 7,14"></polyline>
-						<path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
-					</svg>
-					<span>{{msg-recentchanges}}</span>
-				</a></li>
-				<li><a href="{{link-randompage}}" title="Página aleatoria">
-					<svg class="nav-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-						<circle cx="12" cy="12" r="10"></circle>
-						<path d="M16 16s-1.5-2-4-2-4 2-4 2"></path>
-						<line x1="9" y1="9" x2="9.01" y2="9"></line>
-						<line x1="15" y1="9" x2="15.01" y2="9"></line>
-					</svg>
-					<span>{{msg-randompage}}</span>
-				</a></li>
-			</ul>
-			
-			<!-- Right-aligned items -->
-			<ul class="guanches-secondary-nav-list guanches-secondary-nav-list-right">
-				{{#data-portlets.data-notifications}}
-					<li class="guanches-notification-item">
-						<div class="notification-wrapper">
-							{{>Portlet}}
-							<span class="notification-badge" id="notification-count">3</span>
-						</div>
-					</li>
-				{{/data-portlets.data-notifications}}
-				
-				{{#data-portlets.data-languages}}
-					<li class="guanches-language-selector">
-						<button class="language-selector-btn" aria-expanded="false" aria-haspopup="true">
-							<svg class="language-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-								<circle cx="12" cy="12" r="10"></circle>
-								<line x1="2" y1="12" x2="22" y2="12"></line>
-								<path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-							</svg>
-							<span class="language-text">Idioma</span>
-							<svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-								<polyline points="6,9 12,15 18,9"></polyline>
-							</svg>
-						</button>
-						{{>Portlet}}
-					</li>
-				{{/data-portlets.data-languages}}
-			</ul>
-		</div>
-	</nav>
-
-	<!-- Main content area -->
-	<div class="guanches-container">
-		<!-- Sidebar drawer (off-canvas navigation) -->
-		<div class="guanches-drawer-overlay" id="drawer-overlay" aria-hidden="true"></div>
-		<aside class="guanches-drawer" id="sidebar-drawer" role="navigation" aria-label="{{msg-navigation}}" aria-hidden="true">
-			<div class="guanches-drawer-header">
-				<button class="guanches-drawer-close" aria-label="{{msg-hidenavigation}}">
-					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-						<line x1="18" y1="6" x2="6" y2="18"></line>
-						<line x1="6" y1="6" x2="18" y2="18"></line>
-					</svg>
-				</button>
-				<h2 class="guanches-drawer-title">{{msg-navigation}}</h2>
-			</div>
-			<div class="guanches-drawer-content">
-				<!-- Main navigation -->
-				{{#data-portlets-sidebar.data-portlets-first}}
-					<section class="guanches-portlet guanches-portlet-first guanches-portlet-navigation" aria-labelledby="drawer-navigation-title">
-						<h3 id="drawer-navigation-title" class="guanches-portlet-title">{{msg-navigation}}</h3>
+			{{#data-portlets-sidebar}}
+				{{#array-portlets-rest}}
+					<section class="guanches-portlet guanches-portlet-{{id}}" id="{{id}}" aria-labelledby="{{id}}-title">
+						<h3 id="{{id}}-title" class="guanches-portlet-title">{{label}}</h3>
 						<ul class="guanches-portlet-list">
 							{{#html-items}}{{{.}}}{{/html-items}}
 						</ul>
 					</section>
-				{{/data-portlets-sidebar.data-portlets-first}}
+				{{/array-portlets-rest}}
+			{{/data-portlets-sidebar}}
 
-				{{#data-portlets-sidebar}}
-					{{#array-portlets-rest}}
-						<section class="guanches-portlet guanches-portlet-{{id}}" id="{{id}}" aria-labelledby="{{id}}-title">
-							<h3 id="{{id}}-title" class="guanches-portlet-title">{{label}}</h3>
-							<ul class="guanches-portlet-list">
-								{{#html-items}}{{{.}}}{{/html-items}}
-							</ul>
-						</section>
-					{{/array-portlets-rest}}
-				{{/data-portlets-sidebar}}
+			<!-- Personal tools (user menu) -->
+			{{#data-portlets.data-personal}}{{>Portlet}}{{/data-portlets.data-personal}}
 
-				<!-- Personal tools (user menu) -->
-				{{#data-portlets.data-personal}}{{>Portlet}}{{/data-portlets.data-personal}}
+			<!-- Page actions (edit, history, etc.) -->
+			{{#data-portlets.data-actions}}{{>Portlet}}{{/data-portlets.data-actions}}
 
-				<!-- Page actions (edit, history, etc.) -->
-				{{#data-portlets.data-actions}}{{>Portlet}}{{/data-portlets.data-actions}}
+			<!-- Language switcher -->
+			{{#data-portlets.data-languages}}{{>Portlet}}{{/data-portlets.data-languages}}
 
-				<!-- Language switcher -->
-				{{#data-portlets.data-languages}}{{>Portlet}}{{/data-portlets.data-languages}}
+			<!-- Variants (language variants) -->
+			{{#data-portlets.data-variants}}{{>Portlet}}{{/data-portlets.data-variants}}
 
-				<!-- Variants (language variants) -->
-				{{#data-portlets.data-variants}}{{>Portlet}}{{/data-portlets.data-variants}}
-
-				<!-- Notifications -->
-				{{#data-portlets.data-notifications}}{{>Portlet}}{{/data-portlets.data-notifications}}
-			</div>
-		</aside>
-
-		<!-- Main content -->
-		<main class="guanches-main" id="mw-content" role="main">
-			<!-- Site notice -->
-			{{#html-site-notice}}<div class="guanches-site-notice">{{{.}}}</div>{{/html-site-notice}}
-
-			<!-- Page title and actions -->
-			<header class="guanches-page-header">
-				<h1 class="guanches-page-title">{{{html-title}}}</h1>
-				<div class="guanches-page-actions">
-					{{#data-portlets.data-actions}}{{>Portlet}}{{/data-portlets.data-actions}}
-				</div>
-			</header>
-
-			<!-- Table of contents (if present) -->
-			{{#data-toc}}{{>TableOfContents}}{{/data-toc}}
-
-			<!-- Page content -->
-			<div class="guanches-content">
-				{{{html-body-content}}}
-			</div>
-
-			<!-- After content -->
-			<div class="guanches-after-content">
-				{{{html-after-content}}}
-			</div>
-
-			<!-- Categories -->
-			{{{html-categories}}}
-		</main>
-	</div>
-
-	<!-- Footer -->
-	<footer class="guanches-footer" role="contentinfo">
-		<div class="guanches-footer-container">
-			<!-- Footer navigation -->
-			<nav class="guanches-footer-nav">
-				<ul class="guanches-footer-list">
-					{{#data-footer-places}}{{>Portlet}}{{/data-footer-places}}
-				</ul>
-			</nav>
-
-			<!-- Copyright and info -->
-			<div class="guanches-footer-info">
-				<p class="guanches-copyright">
-					{{#data-footer-info}}{{>FooterInfo}}{{/data-footer-info}}
-				</p>
-				<p class="guanches-powered-by">
-					{{#html-powered-by}}{{.}}{{/html-powered-by}}
-				</p>
-			</div>
+			<!-- Notifications -->
+			{{#data-portlets.data-notifications}}{{>Portlet}}{{/data-portlets.data-notifications}}
 		</div>
-	</footer>
+	</aside>
 
-	<!-- Scripts -->
-	{{{html-bottom-scripts}}}
-</body>
-</html>
+	<!-- Main content -->
+	<main class="guanches-main" id="mw-content" role="main">
+		<!-- Site notice -->
+		{{#html-site-notice}}<div class="guanches-site-notice">{{{.}}}</div>{{/html-site-notice}}
+
+		<!-- Page title and actions -->
+		<header class="guanches-page-header">
+			<h1 class="guanches-page-title">{{{html-title}}}</h1>
+			<div class="guanches-page-actions">
+				{{#data-portlets.data-actions}}{{>Portlet}}{{/data-portlets.data-actions}}
+			</div>
+		</header>
+
+		<!-- Table of contents (if present) -->
+		{{#data-toc}}{{>TableOfContents}}{{/data-toc}}
+
+		<!-- Page content -->
+		<div class="guanches-content">
+			{{{html-body-content}}}
+		</div>
+
+		<!-- After content -->
+		<div class="guanches-after-content">
+			{{{html-after-content}}}
+		</div>
+
+		<!-- Categories -->
+		{{{html-categories}}}
+	</main>
+</div>
+
+<!-- Footer -->
+<footer class="guanches-footer" role="contentinfo">
+	<div class="guanches-footer-container">
+		<!-- Footer navigation -->
+		<nav class="guanches-footer-nav">
+			<ul class="guanches-footer-list">
+				{{#data-footer-places}}{{>Portlet}}{{/data-footer-places}}
+			</ul>
+		</nav>
+
+		<!-- Copyright and info -->
+		<div class="guanches-footer-info">
+			<p class="guanches-copyright">
+				{{#data-footer-info}}{{>FooterInfo}}{{/data-footer-info}}
+			</p>
+			<p class="guanches-powered-by">
+				{{#html-powered-by}}{{.}}{{/html-powered-by}}
+			</p>
+		</div>
+	</div>
+</footer>
